@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C5 Chemical Energetics — Comprehensive Study Guide — Interactive Quiz</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Arial, 'Helvetica Neue', sans-serif;
+    background: #f5f7fa;
+    color: #1a1a1a;
+    line-height: 1.6;
+  }
+  .header {
+    background: #1a3c5e;
+    color: white;
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .header h1 { font-size: 24px; margin-bottom: 4px; }
+  .header p { opacity: 0.8; font-size: 14px; }
+  .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+  .progress-bar {
+    background: #e0e0e0;
+    border-radius: 8px;
+    height: 8px;
+    margin: 20px 0;
+    overflow: hidden;
+  }
+  .progress-fill {
+    background: #2a5f8f;
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 8px;
+  }
+  .score-display {
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 16px;
+  }
+  .question-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: none;
+  }
+  .question-card.active { display: block; }
+  .question-card .q-number {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .question-card .q-type {
+    display: inline-block;
+    background: #e8f0fe;
+    color: #1a3c5e;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .question-card .q-text {
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .option:hover { border-color: #2a5f8f; background: #f0f4ff; }
+  .option.selected { border-color: #2a5f8f; background: #e8f0fe; }
+  .option.correct { border-color: #2d8a4e; background: #e8f5e9; }
+  .option.wrong { border-color: #c62828; background: #ffebee; }
+  .option:disabled { cursor: default; opacity: 0.85; }
+  .tf-btns { display: flex; gap: 12px; }
+  .tf-btns button {
+    flex: 1;
+    padding: 14px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background: white;
+    transition: all 0.2s;
+  }
+  .tf-btns button:hover { border-color: #2a5f8f; }
+  .tf-btns button.correct { border-color: #2d8a4e; background: #e8f5e9; }
+  .tf-btns button.wrong { border-color: #c62828; background: #ffebee; }
+  .freeform-area {
+    width: 100%;
+    min-height: 80px;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    resize: vertical;
+  }
+  .explanation {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-left: 3px solid #2a5f8f;
+    border-radius: 4px;
+    font-size: 14px;
+    display: none;
+  }
+  .explanation.show { display: block; }
+  .nav-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+  .nav-btns button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-next { background: #2a5f8f; color: white; }
+  .btn-next:hover { background: #1a3c5e; }
+  .btn-reveal { background: #e0e0e0; color: #333; }
+  .btn-reveal:hover { background: #d0d0d0; }
+  .results-card {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: none;
+  }
+  .results-card h2 { font-size: 28px; margin-bottom: 8px; }
+  .results-card .score-big {
+    font-size: 64px;
+    font-weight: 700;
+    color: #2a5f8f;
+    margin: 16px 0;
+  }
+  .results-card .grade { font-size: 18px; margin-bottom: 24px; }
+  .btn-restart {
+    padding: 12px 32px;
+    background: #2a5f8f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>C5 Chemical Energetics — Comprehensive Study Guide</h1>
+  <p>Interactive Study Quiz</p>
+</div>
+<div class="container">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="score-display" id="scoreDisplay">Question 1 of —</div>
+  <div id="questionsContainer"></div>
+  <div class="results-card" id="resultsCard">
+    <h2>Quiz Complete!</h2>
+    <div class="score-big" id="finalScore">0%</div>
+    <div class="grade" id="gradeText"></div>
+    <button class="btn-restart" onclick="restart()">Try Again</button>
+  </div>
+</div>
+<script>
+const DATA = {"title": "C5 Chemical Energetics \u2014 Comprehensive Study Guide", "mcq": [{"id": "term_0", "type": "mcq", "question": "What is the definition of <b>Exothermic reaction</b>?", "options": ["The minimum amount of energy that colliding particles must possess for a reaction to occur", "A reaction that transfers thermal energy to the surroundings, causing an increase in temperature", "The total thermal energy (heat) content of a chemical system", "A reaction that takes in thermal energy from the surroundings, causing a decrease in temperature"], "correct": 1, "explanation": "A reaction that transfers thermal energy to the surroundings, causing an increase in temperature"}, {"id": "term_1", "type": "mcq", "question": "What is the definition of <b>Endothermic reaction</b>?", "options": ["A reaction that takes in thermal energy from the surroundings, causing a decrease in temperature", "The process of pulling atoms apart by overcoming attractive forces; always endothermic", "The chemicals involved in the reaction", "The energy required to break one particular type of covalent bond; the same energy is released when that bond forms"], "correct": 0, "explanation": "A reaction that takes in thermal energy from the surroundings, causing a decrease in temperature"}, {"id": "term_2", "type": "mcq", "question": "What is the definition of <b>Enthalpy (H)</b>?", "options": ["A reaction that transfers thermal energy to the surroundings, causing an increase in temperature", "The transfer of thermal energy during a reaction; also called heat of reaction", "The energy required to break one particular type of covalent bond; the same energy is released when that bond forms", "The total thermal energy (heat) content of a chemical system"], "correct": 3, "explanation": "The total thermal energy (heat) content of a chemical system"}, {"id": "term_3", "type": "mcq", "question": "What is the definition of <b>Enthalpy change (\u0394H)</b>?", "options": ["The process of pulling atoms apart by overcoming attractive forces; always endothermic", "A diagram showing the energy levels of reactants and products, indicating whether a reaction is exothermic or endothermic", "The total thermal energy (heat) content of a chemical system", "The transfer of thermal energy during a reaction; also called heat of reaction"], "correct": 3, "explanation": "The transfer of thermal energy during a reaction; also called heat of reaction"}, {"id": "term_4", "type": "mcq", "question": "What is the definition of <b>Energy level diagram</b>?", "options": ["The process of pulling atoms apart by overcoming attractive forces; always endothermic", "Everything outside the system \u2014 the container, air, water, thermometer", "A diagram showing the energy levels of reactants and products, indicating whether a reaction is exothermic or endothermic", "The energy required to break one particular type of covalent bond; the same energy is released when that bond forms"], "correct": 2, "explanation": "A diagram showing the energy levels of reactants and products, indicating whether a reaction is exothermic or endothermic"}, {"id": "term_5", "type": "mcq", "question": "What is the definition of <b>Bond energy (E)</b>?", "options": ["The energy required to break one particular type of covalent bond; the same energy is released when that bond forms", "A reaction that takes in thermal energy from the surroundings, causing a decrease in temperature", "The total thermal energy (heat) content of a chemical system", "The minimum amount of energy that colliding particles must possess for a reaction to occur"], "correct": 0, "explanation": "The energy required to break one particular type of covalent bond; the same energy is released when that bond forms"}, {"id": "term_6", "type": "mcq", "question": "What is the definition of <b>Activation energy (E\u2090)</b>?", "options": ["The transfer of thermal energy during a reaction; also called heat of reaction", "Everything outside the system \u2014 the container, air, water, thermometer", "The process of pulling atoms apart by overcoming attractive forces; always endothermic", "The minimum amount of energy that colliding particles must possess for a reaction to occur"], "correct": 3, "explanation": "The minimum amount of energy that colliding particles must possess for a reaction to occur"}, {"id": "term_7", "type": "mcq", "question": "What is the definition of <b>Bond breaking</b>?", "options": ["The process of pulling atoms apart by overcoming attractive forces; always endothermic", "A diagram showing the energy levels of reactants and products, indicating whether a reaction is exothermic or endothermic", "The total thermal energy (heat) content of a chemical system", "The energy required to break one particular type of covalent bond; the same energy is released when that bond forms"], "correct": 0, "explanation": "The process of pulling atoms apart by overcoming attractive forces; always endothermic"}, {"id": "term_8", "type": "mcq", "question": "What is the definition of <b>Bond making</b>?", "options": ["The chemicals involved in the reaction", "The total thermal energy (heat) content of a chemical system", "The transfer of thermal energy during a reaction; also called heat of reaction", "The process of atoms coming together to form new bonds; always exothermic"], "correct": 3, "explanation": "The process of atoms coming together to form new bonds; always exothermic"}, {"id": "term_9", "type": "mcq", "question": "What is the definition of <b>System</b>?", "options": ["A reaction that transfers thermal energy to the surroundings, causing an increase in temperature", "A reaction that takes in thermal energy from the surroundings, causing a decrease in temperature", "Everything outside the system \u2014 the container, air, water, thermometer", "The chemicals involved in the reaction"], "correct": 3, "explanation": "The chemicals involved in the reaction"}, {"id": "term_10", "type": "mcq", "question": "What is the definition of <b>Surroundings</b>?", "options": ["Everything outside the system \u2014 the container, air, water, thermometer", "The chemicals involved in the reaction", "The transfer of thermal energy during a reaction; also called heat of reaction", "A reaction that transfers thermal energy to the surroundings, causing an increase in temperature"], "correct": 0, "explanation": "Everything outside the system \u2014 the container, air, water, thermometer"}], "freeform": [{"id": "qa_0", "type": "freeform", "question": "Which type of reaction takes in heat from its surroundings?", "answer": "An endothermic reaction takes in thermal energy from the surroundings, causing a decrease in the temperature of the surroundings.\n\n---", "marks": null}, {"id": "qa_1", "type": "freeform", "question": "(3 marks)\nWhat key features of an energy level diagram would indicate an endothermic reaction?", "answer": "Three features indicate an endothermic reaction: (1) The products are shown at a higher energy level than the reactants. (2) The arrow representing \u0394H points upwards from reactants to products. (3) The value of \u0394H is positive, showing that energy has been absorbed from the surroundings.\n\n---", "marks": 3}, {"id": "qa_2", "type": "freeform", "question": "Is bond breaking an endothermic or an exothermic process? Explain your answer.", "answer": "Bond breaking is an endothermic process. Energy must be supplied (absorbed from the surroundings) to overcome the attractive forces holding atoms together in a bond. This means energy enters the system when bonds are broken.\n\n---", "marks": null}, {"id": "qa_3", "type": "freeform", "question": "(2 marks)\nDefine the term enthalpy change (\u0394H).", "answer": "The enthalpy change (\u0394H) is the transfer of thermal energy during a chemical reaction. It is also known as the heat of reaction. For exothermic reactions \u0394H is negative; for endothermic reactions \u0394H is positive.\n\n---", "marks": 2}, {"id": "qa_4", "type": "freeform", "question": "(2 marks)\nState what is meant by the term activation energy.", "answer": "Activation energy (E\u2090) is the minimum amount of energy that colliding particles must possess in order for a chemical reaction to take place. It is the energy needed to start breaking bonds in the reactant molecules.\n\n---", "marks": 2}, {"id": "qa_5", "type": "freeform", "question": "(1 mark)\nIdentify which of the following statements best describes an exothermic reaction: A. The surroundings of the reaction get warmer. B. The reaction absorbs thermal energy. C. The temperature of the reaction mixture increases. D. The reaction releases heat energy.", "answer": "The correct answer is A \u2014 &quot;The surroundings of the reaction get warmer.&quot; This is the precise definition: an exothermic reaction transfers thermal energy TO the surroundings, causing their temperature to increase. Option D is imprecise and option C refers to the mixture, not the surroundings.\n\n---", "marks": 1}], "truefalse": [{"id": "tf_0", "type": "truefalse", "statement": "The system = the reacting chemicals themselves", "correct": true, "explanation": "The system = the reacting chemicals themselves"}, {"id": "tf_1", "type": "truefalse", "statement": "The surroundings = everything else \u2014 the beaker, the water, the air, the thermometer, your hand", "correct": true, "explanation": "The surroundings = everything else \u2014 the beaker, the water, the air, the thermometer, your hand"}, {"id": "tf_2", "type": "truefalse", "statement": "Key point for exams: You MUST describe exothermic and endothermic in terms of energy transfer to/from the surroundings, not just &quot;gives out heat&quot; or &quot;takes in heat&quot;.", "correct": true, "explanation": "Key point for exams: You MUST describe exothermic and endothermic in terms of energy transfer to/from the surroundings, not just &quot;gives out heat&quot; or &quot;takes in heat&quot;."}, {"id": "tf_3", "type": "truefalse", "statement": "Memory aid: &quot;EXothermic = energy EXits the reaction&quot;", "correct": true, "explanation": "Memory aid: &quot;EXothermic = energy EXits the reaction&quot;"}, {"id": "tf_4", "type": "truefalse", "statement": "Common examples of exothermic reactions:", "correct": true, "explanation": "Common examples of exothermic reactions:"}, {"id": "tf_5", "type": "truefalse", "statement": "Combustion (burning fuels) \u2014 burning methane, wood, petrol: CH\u2084(g) + 2O\u2082(g) \u2192 CO\u2082(g) + 2H\u2082O(g)", "correct": true, "explanation": "Combustion (burning fuels) \u2014 burning methane, wood, petrol: CH\u2084(g) + 2O\u2082(g) \u2192 CO\u2082(g) + 2H\u2082O(g)"}, {"id": "tf_6", "type": "truefalse", "statement": "Neutralisation \u2014 acid + alkali \u2192 salt + water", "correct": true, "explanation": "Neutralisation \u2014 acid + alkali \u2192 salt + water"}, {"id": "tf_7", "type": "truefalse", "statement": "Oxidation reactions \u2014 rusting of iron, respiration", "correct": true, "explanation": "Oxidation reactions \u2014 rusting of iron, respiration"}, {"id": "tf_8", "type": "truefalse", "statement": "Displacement reactions \u2014 adding zinc to copper(II) sulfate solution: Zn(s) + CuSO\u2084(aq) \u2192 ZnSO\u2084(aq) + Cu(s)", "correct": true, "explanation": "Displacement reactions \u2014 adding zinc to copper(II) sulfate solution: Zn(s) + CuSO\u2084(aq) \u2192 ZnSO\u2084(aq) + Cu(s)"}, {"id": "tf_9", "type": "truefalse", "statement": "Everyday exothermic processes:", "correct": true, "explanation": "Everyday exothermic processes:"}, {"id": "tf_10", "type": "truefalse", "statement": "Memory aid: &quot;ENdothermic = energy ENters the reaction&quot;", "correct": true, "explanation": "Memory aid: &quot;ENdothermic = energy ENters the reaction&quot;"}, {"id": "tf_11", "type": "truefalse", "statement": "Common examples of endothermic reactions:", "correct": true, "explanation": "Common examples of endothermic reactions:"}, {"id": "tf_12", "type": "truefalse", "statement": "Photosynthesis \u2014 6CO\u2082 + 6H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082 (plants absorb light energy)", "correct": true, "explanation": "Photosynthesis \u2014 6CO\u2082 + 6H\u2082O \u2192 C\u2086H\u2081\u2082O\u2086 + 6O\u2082 (plants absorb light energy)"}, {"id": "tf_13", "type": "truefalse", "statement": "Thermal decomposition \u2014 breaking down compounds with heat, e.g., CaCO\u2083 \u2192 CaO + CO\u2082", "correct": true, "explanation": "Thermal decomposition \u2014 breaking down compounds with heat, e.g., CaCO\u2083 \u2192 CaO + CO\u2082"}, {"id": "tf_14", "type": "truefalse", "statement": "Dissolving ammonium nitrate in water \u2014 used in cold packs", "correct": true, "explanation": "Dissolving ammonium nitrate in water \u2014 used in cold packs"}]};
+let allQ = [];
+let idx = 0;
+let score = 0;
+let answered = 0;
+
+function init() {
+  allQ = [...(DATA.mcq||[]), ...(DATA.truefalse||[]), ...(DATA.freeform||[])];
+  if (!allQ.length) { document.getElementById('scoreDisplay').textContent = 'No questions available.'; return; }
+  idx = 0; score = 0; answered = 0;
+  renderAll();
+  showQuestion(0);
+}
+
+function renderAll() {
+  const c = document.getElementById('questionsContainer');
+  c.innerHTML = '';
+  allQ.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'question-card';
+    card.id = 'q_' + i;
+
+    let typeLabel = q.type === 'mcq' ? 'Multiple Choice' : q.type === 'truefalse' ? 'True / False' : 'Written Answer';
+    let inner = `<div class="q-number">Question ${i+1} of ${allQ.length}</div>`;
+    inner += `<span class="q-type">${typeLabel}</span>`;
+
+    if (q.type === 'mcq') {
+      inner += `<div class="q-text">${q.question}</div>`;
+      q.options.forEach((o, oi) => {
+        inner += `<button class="option" data-qi="${i}" data-oi="${oi}" onclick="answerMCQ(${i},${oi})">${o}</button>`;
+      });
+      inner += `<div class="explanation" id="expl_${i}">${q.explanation||''}</div>`;
+    } else if (q.type === 'truefalse') {
+      inner += `<div class="q-text">${q.statement}</div>`;
+      inner += `<div class="tf-btns"><button data-qi="${i}" data-val="true" onclick="answerTF(${i},true)">True</button>`;
+      inner += `<button data-qi="${i}" data-val="false" onclick="answerTF(${i},false)">False</button></div>`;
+      inner += `<div class="explanation" id="expl_${i}">Correct statement: ${q.explanation||''}</div>`;
+    } else {
+      inner += `<div class="q-text">${q.question}</div>`;
+      inner += `<textarea class="freeform-area" id="ans_${i}" placeholder="Type your answer..."></textarea>`;
+      inner += `<div class="explanation" id="expl_${i}"><b>Model answer:</b> ${q.answer||''}</div>`;
+    }
+
+    inner += `<div class="nav-btns">`;
+    if (q.type === 'freeform') inner += `<button class="btn-reveal" onclick="revealFreeform(${i})">Show Answer</button>`;
+    else inner += `<span></span>`;
+    inner += `<button class="btn-next" id="next_${i}" onclick="nextQ()">${i===allQ.length-1?'Finish':'Next →'}</button>`;
+    inner += `</div>`;
+
+    card.innerHTML = inner;
+    c.appendChild(card);
+  });
+}
+
+function showQuestion(n) {
+  document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active'));
+  const card = document.getElementById('q_' + n);
+  if (card) card.classList.add('active');
+  document.getElementById('progressFill').style.width = ((n+1)/allQ.length*100) + '%';
+  document.getElementById('scoreDisplay').textContent = `Question ${n+1} of ${allQ.length} · Score: ${score}/${answered}`;
+}
+
+function answerMCQ(qi, oi) {
+  const q = allQ[qi];
+  const btns = document.querySelectorAll(`button[data-qi="${qi}"]`);
+  btns.forEach(b => { b.disabled = true; b.classList.remove('selected'); });
+  btns[oi].classList.add('selected');
+  if (oi === q.correct) { btns[oi].classList.add('correct'); score++; }
+  else { btns[oi].classList.add('wrong'); btns[q.correct].classList.add('correct'); }
+  answered++;
+  document.getElementById('expl_' + qi).classList.add('show');
+  document.getElementById('scoreDisplay').textContent = `Question ${qi+1} of ${allQ.length} · Score: ${score}/${answered}`;
+}
+
+function answerTF(qi, val) {
+  const q = allQ[qi];
+  const btns = document.querySelectorAll(`button[data-qi="${qi}"]`);
+  btns.forEach(b => b.disabled = true);
+  const correct = val === q.correct;
+  btns.forEach(b => {
+    if (String(b.dataset.val) === String(q.correct)) b.classList.add('correct');
+    if (b.dataset.val === String(val) && !correct) b.classList.add('wrong');
+  });
+  if (correct) score++;
+  answered++;
+  document.getElementById('expl_' + qi).classList.add('show');
+  document.getElementById('scoreDisplay').textContent = `Question ${qi+1} of ${allQ.length} · Score: ${score}/${answered}`;
+}
+
+function revealFreeform(qi) {
+  document.getElementById('expl_' + qi).classList.add('show');
+  answered++;
+  document.getElementById('scoreDisplay').textContent = `Question ${qi+1} of ${allQ.length} · Score: ${score}/${answered}`;
+}
+
+function nextQ() {
+  idx++;
+  if (idx >= allQ.length) { showResults(); return; }
+  showQuestion(idx);
+}
+
+function showResults() {
+  document.querySelectorAll('.question-card').forEach(c => c.classList.remove('active'));
+  const pct = answered > 0 ? Math.round(score/answered*100) : 0;
+  document.getElementById('finalScore').textContent = pct + '%';
+  let grade = pct >= 90 ? 'Outstanding!' : pct >= 70 ? 'Great work!' : pct >= 50 ? 'Good effort — keep studying!' : 'Review the material and try again.';
+  document.getElementById('gradeText').textContent = grade + ` (${score}/${answered} correct)`;
+  document.getElementById('resultsCard').style.display = 'block';
+  document.getElementById('progressFill').style.width = '100%';
+  // Save to localStorage for dashboard
+  try {
+    const sessions = JSON.parse(localStorage.getItem('sf_quiz_sessions') || '[]');
+    sessions.push({ date: new Date().toISOString(), score, total: answered, pct });
+    localStorage.setItem('sf_quiz_sessions', JSON.stringify(sessions));
+  } catch(e) {}
+}
+
+function restart() {
+  document.getElementById('resultsCard').style.display = 'none';
+  init();
+}
+
+init();
+</script>
+</body>
+</html>

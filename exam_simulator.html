@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>C5 Chemical Energetics — Comprehensive Study Guide — Exam Simulator</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f5f7fa; color: #1a1a1a; line-height: 1.6; }
+  .header { background: #1a3c5e; color: white; padding: 20px; text-align: center; position: sticky; top: 0; z-index: 100; }
+  .header h1 { font-size: 22px; }
+  .timer { font-size: 28px; font-weight: 700; margin-top: 8px; font-variant-numeric: tabular-nums; }
+  .timer.warning { color: #ff9800; }
+  .timer.danger { color: #ff4444; animation: pulse 1s infinite; }
+  @keyframes pulse { 50% { opacity: 0.5; } }
+  .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+  .exam-info {
+    background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); text-align: center;
+  }
+  .exam-info .stat { display: inline-block; margin: 0 16px; }
+  .exam-info .stat-val { font-size: 24px; font-weight: 700; color: #2a5f8f; }
+  .exam-info .stat-label { font-size: 12px; color: #888; }
+  .q-card {
+    background: white; border-radius: 12px; padding: 24px; margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .q-card .q-header { display: flex; justify-content: space-between; margin-bottom: 12px; }
+  .q-card .q-num { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+  .q-card .q-marks { font-size: 12px; color: #2a5f8f; font-weight: 600; }
+  .q-card .q-text { font-size: 16px; margin-bottom: 12px; }
+  .q-card textarea {
+    width: 100%; min-height: 100px; padding: 12px; border: 2px solid #e0e0e0;
+    border-radius: 8px; font-family: inherit; font-size: 14px; resize: vertical;
+  }
+  .q-card textarea:focus { border-color: #2a5f8f; outline: none; }
+  .answer-reveal {
+    margin-top: 12px; padding: 12px 16px; background: #f0faf0;
+    border-left: 3px solid #2d8a4e; border-radius: 4px; font-size: 14px;
+    display: none; white-space: pre-wrap;
+  }
+  .answer-reveal.show { display: block; }
+  .controls { text-align: center; margin: 24px 0; }
+  .controls button {
+    padding: 12px 32px; border: none; border-radius: 8px; font-size: 16px;
+    font-weight: 600; cursor: pointer; margin: 0 8px;
+  }
+  .btn-start { background: #2a5f8f; color: white; }
+  .btn-start:hover { background: #1a3c5e; }
+  .btn-submit { background: #2d8a4e; color: white; }
+  .btn-submit:hover { background: #1d6a3e; }
+  .btn-show { background: #e0e0e0; color: #333; }
+  .btn-show:hover { background: #d0d0d0; }
+  .hidden { display: none; }
+  .results {
+    background: white; border-radius: 12px; padding: 32px; text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .results h2 { font-size: 28px; margin-bottom: 16px; }
+  .results .time-taken { font-size: 18px; color: #555; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>C5 Chemical Energetics — Comprehensive Study Guide — Exam Simulator</h1>
+  <div class="timer" id="timer">--:--</div>
+</div>
+<div class="container">
+  <div class="exam-info" id="examInfo">
+    <div class="stat"><div class="stat-val" id="totalQ">-</div><div class="stat-label">Questions</div></div>
+    <div class="stat"><div class="stat-val" id="totalM">-</div><div class="stat-label">Total Marks</div></div>
+    <div class="stat"><div class="stat-val" id="timeLimit">-</div><div class="stat-label">Minutes</div></div>
+    <div style="margin-top:16px;">
+      <button class="btn-start" id="btnStart" onclick="startExam()">Start Exam</button>
+    </div>
+  </div>
+  <div id="questionsArea" class="hidden"></div>
+  <div id="submitArea" class="hidden controls">
+    <button class="btn-submit" onclick="submitExam()">Submit &amp; View Answers</button>
+  </div>
+  <div id="resultsArea" class="hidden"></div>
+</div>
+<script>
+const EXAM = {"title": "C5 Chemical Energetics \u2014 Comprehensive Study Guide", "timeMinutes": 45, "questions": [{"id": "Question C5.01", "question": "Which type of reaction takes in heat from its surroundings?", "answer": "An endothermic reaction takes in thermal energy from the surroundings, causing a decrease in the temperature of the surroundings.\n\n---", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question C5.02", "question": "(4 marks)\na) Draw an energy level diagram for the following reaction, which is exothermic: Zn(s) + CuSO\u2084(aq) \u2192 ZnSO\u2084(aq) + Cu(s). b) Label the enthalpy change for the reaction and state whether this will be positive or negative.", "answer": "The energy level diagram should show: reactants (Zn + CuSO\u2084) at a higher energy level, products (ZnSO\u2084 + Cu) at a lower energy level, a downward arrow labelled \u0394H between the two levels. The x-axis is labelled &quot;Progress of reaction&quot; and the y-axis is labelled &quot;Energy / kJ&quot;. The enthalpy change \u0394H is negative because the reaction is exothermic \u2014 energy is released to the surroundings.\n\n---", "marks": 4, "hasImage": false, "imagePath": null}, {"id": "Question C5.03", "question": "(3 marks)\nWhat key features of an energy level diagram would indicate an endothermic reaction?", "answer": "Three features indicate an endothermic reaction: (1) The products are shown at a higher energy level than the reactants. (2) The arrow representing \u0394H points upwards from reactants to products. (3) The value of \u0394H is positive, showing that energy has been absorbed from the surroundings.\n\n---", "marks": 3, "hasImage": false, "imagePath": null}, {"id": "Question C5.04", "question": "Is bond breaking an endothermic or an exothermic process? Explain your answer.", "answer": "Bond breaking is an endothermic process. Energy must be supplied (absorbed from the surroundings) to overcome the attractive forces holding atoms together in a bond. This means energy enters the system when bonds are broken.\n\n---", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question C5.05", "question": "(3 marks)\nHydrogen peroxide decomposes to produce water and oxygen. The equation is: 2H\u2082O\u2082(l) \u2192 2H\u2082O(l) + O\u2082(g). Explain why every chemical reaction must have an activation energy even though for some reactions it may have a low value.", "answer": "Every chemical reaction requires activation energy because bonds in the reactant molecules must first be broken before new bonds can form. Breaking bonds is always an endothermic process that requires energy input. The colliding particles must possess at least a minimum amount of energy (the activation energy) to break these existing bonds and allow the reaction to proceed, even if the overall reaction releases energy (is exothermic).\n\n---", "marks": 3, "hasImage": false, "imagePath": null}, {"id": "Question C5.06", "question": "(2 marks)\nDefine the term enthalpy change (\u0394H).", "answer": "The enthalpy change (\u0394H) is the transfer of thermal energy during a chemical reaction. It is also known as the heat of reaction. For exothermic reactions \u0394H is negative; for endothermic reactions \u0394H is positive.\n\n---", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question C5.07", "question": "(3 marks)\nMethane burns in oxygen according to: CH\u2084(g) + 2O\u2082(g) \u2192 CO\u2082(g) + 2H\u2082O(g), \u0394H = \u2212728 kJ/mol. Explain what the negative sign of \u0394H tells you about this reaction.", "answer": "The negative sign of \u0394H tells us the reaction is exothermic. This means that thermal energy is transferred from the reacting chemicals (the system) to the surroundings. The products (CO\u2082 and H\u2082O) have less energy than the reactants (CH\u2084 and O\u2082), and 728 kJ of energy is released per mole of methane burned.\n\n---", "marks": 3, "hasImage": false, "imagePath": null}, {"id": "Question C5.08", "question": "(4 marks)\nExplain why the combustion of methane is exothermic in terms of bond breaking and bond making.", "answer": "During the combustion of methane, bonds in the reactants must first be broken: four C\u2212H bonds in methane and two O=O bonds in oxygen molecules. This step absorbs energy (endothermic). New bonds are then formed in the products: two C=O bonds in carbon dioxide and four O\u2212H bonds in water. This step releases energy (exothermic). The total energy released by making the new bonds is greater than the total energy absorbed by breaking the old bonds, so the overall reaction is exothermic \u2014 there is a net release of energy to the surroundings.\n\n---", "marks": 4, "hasImage": false, "imagePath": null}, {"id": "Question C5.09", "question": "(2 marks)\nState what is meant by the term activation energy.", "answer": "Activation energy (E\u2090) is the minimum amount of energy that colliding particles must possess in order for a chemical reaction to take place. It is the energy needed to start breaking bonds in the reactant molecules.\n\n---", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Question C5.10", "question": "(5 marks)\nThe equation for the reaction between sodium hydrogencarbonate and hydrochloric acid is: NaHCO\u2083 + HCl \u2192 NaCl + CO\u2082 + H\u2082O. At the beginning of the reaction the temperature of the acid is 21 \u00b0C. When the reaction is complete the temperature is 16 \u00b0C. a) Suggest an observation as the reaction proceeds. b) State how you would know when the reaction has finished. c) Is this reaction exothermic or endothermic? Explain your answer.", "answer": "a) Bubbles (effervescence/fizzing) would be observed as carbon dioxide gas is produced. b) The reaction has finished when the bubbling/effervescence stops and no more gas is being produced. c) This reaction is endothermic. The temperature of the surroundings (the solution) decreased from 21 \u00b0C to 16 \u00b0C. This shows that thermal energy was absorbed from the surroundings by the reacting chemicals, causing the surroundings to cool down. The enthalpy change \u0394H for this reaction is positive.\n\n---", "marks": 5, "hasImage": false, "imagePath": null}, {"id": "Question C5.11", "question": "(3 marks)\nThe reaction between nitrogen and oxygen in a car engine is endothermic: N\u2082(g) + O\u2082(g) \u2192 2NO(g). On the energy level diagram for this reaction, describe where the reactants, products, \u0394H, and activation energy (E\u2090) would be positioned.", "answer": "On the energy level diagram: the reactants (N\u2082 + O\u2082) would be drawn at a lower energy level. The products (2NO) would be drawn at a higher energy level (because the reaction is endothermic). The \u0394H arrow would point upwards from the reactants line to the products line, and would be labelled with a positive \u0394H value. The activation energy (E\u2090) would be shown as a hump above the reactants level \u2014 measured from the reactants line to the top of the energy hump, not from the products line.\n\n---", "marks": 3, "hasImage": false, "imagePath": null}, {"id": "Question C5.12", "question": "(2 marks)\nA student says: &quot;Bond breaking is exothermic because you need to heat the substance to break the bonds, so heat exits.&quot; Explain why the student is wrong.", "answer": "The student is incorrect. Bond breaking is endothermic, not exothermic. When bonds are broken, energy is absorbed from the surroundings into the system to overcome the attractive forces between atoms. &quot;Endothermic&quot; means energy enters the system. The fact that you need to supply heat actually proves it is endothermic \u2014 the energy goes INTO the bond-breaking process, not out of it.\n\n---", "marks": 2, "hasImage": false, "imagePath": null}, {"id": "Practice Question 1", "question": "(1 mark)\nIdentify which of the following statements best describes an exothermic reaction: A. The surroundings of the reaction get warmer. B. The reaction absorbs thermal energy. C. The temperature of the reaction mixture increases. D. The reaction releases heat energy.", "answer": "The correct answer is A \u2014 &quot;The surroundings of the reaction get warmer.&quot; This is the precise definition: an exothermic reaction transfers thermal energy TO the surroundings, causing their temperature to increase. Option D is imprecise and option C refers to the mixture, not the surroundings.\n\n---", "marks": 1, "hasImage": false, "imagePath": null}, {"id": "Practice Question 2", "question": "(5 marks)\nCopy and complete the table for each process, stating whether the temperature change is an increase or decrease, and whether the change is chemical or physical: water vapour changing to water, salt solution to salt and water, magnesium plus hydrochloric acid, burning hydrogen to form water, iron rusting.", "answer": "Water vapour \u2192 water: temperature increase, physical change (condensation is exothermic). Salt solution \u2192 salt and water: temperature increase, physical change (evaporation requires heat input, but crystallisation releases heat). Magnesium + hydrochloric acid: temperature increase, chemical change (displacement/neutralisation \u2014 exothermic). Burning hydrogen \u2192 water: temperature increase, chemical change (combustion \u2014 exothermic). Iron rusting: temperature increase, chemical change (oxidation \u2014 exothermic, though very slow).\n\n---", "marks": 5, "hasImage": false, "imagePath": null}, {"id": "Practice Question 3", "question": "(6 marks)\nA different carbonate is reacted with hydrochloric acid. The energy level diagram shows products higher than reactants. a) Is this reaction exothermic or endothermic? Explain your answer. b) What happens to the temperature of the surroundings during this reaction? c) What is the sign of \u0394H for this reaction?", "answer": "a) This reaction is endothermic because the products are at a higher energy level than the reactants on the energy level diagram. This means the system has absorbed energy from the surroundings. b) The temperature of the surroundings decreases. Thermal energy is transferred from the surroundings into the system (the reacting chemicals), so the surroundings cool down. c) \u0394H is positive for this reaction, because energy is absorbed from the surroundings (endothermic reactions always have a positive \u0394H).\n\n---", "marks": 6, "hasImage": false, "imagePath": null}, {"id": "Practice Question 4", "question": "(2 marks)\nNitrogen reacts with hydrogen to form ammonia: N\u2082(g) + 3H\u2082(g) \u2192 2NH\u2083(g). The figure shows the energy pathway diagram for the reaction between hydrogen and nitrogen. On the energy profile, label the overall enthalpy change \u0394H and the activation energy E\u2090.", "answer": "\u0394H should be labelled as the vertical distance between the energy level of the reactants (N\u2082 + 3H\u2082) and the energy level of the products (2NH\u2083). Since the products are at a lower energy level, \u0394H is negative (exothermic). E\u2090 (activation energy) should be labelled as the vertical distance from the reactants&#x27; energy level to the top of the energy &quot;hump&quot; (the peak of the curve). E\u2090 is always measured upwards from the reactants, not from the products.\n\n---\n\n## 7. Quick Revision Card\n\n5 things to remember for C5 Chemical Energetics:\n\n1. Exothermic = energy exits \u2192 surroundings get warmer \u2192 \u0394H is negative \u2192 products are LOWER on energy level diagram\n\n2. Endothermic = energy enters \u2192 surroundings get cooler \u2192 \u0394H is positive \u2192 products are HIGHER on energy level diagram\n\n3. MEXOBENDO: Making bonds", "marks": 2, "hasImage": true, "imagePath": "pages_c5/IMG_2979.png"}], "totalMarks": 49};
+let timerInterval = null;
+let secondsLeft = 0;
+let startTime = null;
+
+document.getElementById('totalQ').textContent = EXAM.questions.length;
+document.getElementById('totalM').textContent = EXAM.totalMarks;
+document.getElementById('timeLimit').textContent = EXAM.timeMinutes;
+
+function startExam() {
+  document.getElementById('btnStart').classList.add('hidden');
+  document.getElementById('questionsArea').classList.remove('hidden');
+  document.getElementById('submitArea').classList.remove('hidden');
+  secondsLeft = EXAM.timeMinutes * 60;
+  startTime = Date.now();
+  renderQuestions();
+  timerInterval = setInterval(tick, 1000);
+  tick();
+}
+
+function tick() {
+  secondsLeft--;
+  const m = Math.floor(secondsLeft / 60);
+  const s = secondsLeft % 60;
+  const el = document.getElementById('timer');
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.className = 'timer' + (secondsLeft < 300 ? (secondsLeft < 60 ? ' danger' : ' warning') : '');
+  if (secondsLeft <= 0) { clearInterval(timerInterval); submitExam(); }
+}
+
+function renderQuestions() {
+  const area = document.getElementById('questionsArea');
+  area.innerHTML = '';
+  EXAM.questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'q-card';
+    div.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">Question ${i+1} — ${q.id}</span>
+        <span class="q-marks">[${q.marks} marks]</span>
+      </div>
+      <div class="q-text">${q.question}</div>
+      <textarea id="ans_${i}" placeholder="Write your answer here..."></textarea>
+      <div class="answer-reveal" id="reveal_${i}"><b>Model Answer:</b><br>${q.answer}</div>
+    `;
+    area.appendChild(div);
+  });
+}
+
+function submitExam() {
+  clearInterval(timerInterval);
+  const elapsed = Math.round((Date.now() - startTime) / 1000);
+  const m = Math.floor(elapsed / 60);
+  const s = elapsed % 60;
+
+  document.getElementById('submitArea').classList.add('hidden');
+  document.querySelectorAll('.answer-reveal').forEach(el => el.classList.add('show'));
+  document.querySelectorAll('textarea').forEach(el => el.disabled = true);
+  document.getElementById('timer').textContent = 'DONE';
+  document.getElementById('timer').className = 'timer';
+
+  const results = document.getElementById('resultsArea');
+  results.classList.remove('hidden');
+  results.innerHTML = `
+    <div class="results">
+      <h2>Exam Complete</h2>
+      <div class="time-taken">Time taken: ${m}m ${s}s</div>
+      <p style="margin-top:12px;color:#555;">Model answers shown below each question. Review your responses.</p>
+    </div>
+  `;
+
+  try {
+    const sessions = JSON.parse(localStorage.getItem('sf_exam_sessions') || '[]');
+    sessions.push({ date: new Date().toISOString(), questions: EXAM.questions.length, totalMarks: EXAM.totalMarks, timeSec: elapsed });
+    localStorage.setItem('sf_exam_sessions', JSON.stringify(sessions));
+  } catch(e) {}
+}
+</script>
+</body>
+</html>
